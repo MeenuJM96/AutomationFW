@@ -13,13 +13,13 @@ public class AddToCartTest extends BaseTest {
 		addToCartPage.viewLaptop();
 		
 		String actualProductName= addToCartPage. getProductTitle();
-	    Assert.assertEquals(prop.getProperty("expectedProductName"), actualProductName, "Product does not match");
+	    Assert.assertEquals(actualProductName, prop.getProperty("expectedProductName"), "Product does not match");
 		
 	    addToCartPage.addProductToCart();
 	    
 	    String actualText = addToCartPage.getConfirmationMsg();
 	   
-        Assert.assertEquals(prop.getProperty("expectedText"), actualText, "Product is not added to cart");
+        Assert.assertEquals(actualText, prop.getProperty("expectedText"), "Product is not added to cart");
 		
 	}
 }

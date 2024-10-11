@@ -10,24 +10,30 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.demoshop.pageObjects.AddToCartPage;
 import com.demoshop.pageObjects.CheckOutPage;
 import com.demoshop.pageObjects.LoginPage;
 import com.demoshop.pageObjects.ProductPage;
 import com.demoshop.pageObjects.RegisterPage;
+import com.demoshop.pageObjects.RemoveProductPage;
 import com.demoshop.utils.TestProperties;
 
 public class BaseTest {
-	
 	WebDriver driver= null;
 	public Properties prop;
 	
-   @BeforeMethod()
-	public void initDriver() throws IOException {
+   @BeforeMethod(alwaysRun=true)
+   @Parameters({"browserName"})
+	public void initDriver(@Optional String browserName) throws IOException {
 	    prop = TestProperties.getProperties();
 	   System.out.println("In before Method");
-	   String browserName = prop.getProperty("browser");
+	   if(browserName==null || browserName.isEmpty()) {
+		 browserName = prop.getProperty("browser"); 
+	   }
+	   
 	   System.out.println(browserName);
 		getDriver(browserName);
 		driver.manage().window().maximize();
@@ -56,8 +62,9 @@ public class BaseTest {
 	
 	public LoginPage loginPage;
 	public RegisterPage registerPage;
-	public  ProductPage productPage;
+	public ProductPage productPage;
 	public AddToCartPage addToCartPage;
+	public RemoveProductPage removeProductPage;
 	public CheckOutPage checkOutPage;
 	
 	public void initPages() {
@@ -65,10 +72,11 @@ public class BaseTest {
 	    registerPage = new RegisterPage(driver);
 	    productPage = new ProductPage(driver);
 	    addToCartPage = new AddToCartPage(driver);
+	   removeProductPage = new  RemoveProductPage(driver); 
 	    checkOutPage = new CheckOutPage(driver);
 	}
 	
-	@AfterMethod()
+	@AfterMethod(alwaysRun=true)
 	public void tearDown() {
 		driver.quit();
 	}

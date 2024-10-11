@@ -7,8 +7,8 @@ import com.demoshop.utils.DataUtils;
 
 public class E2ECheckoutTest extends BaseTest{
 
-	@Test
-	public void verifyNewUserRegistersAndCheckoutProduct() {
+	@Test(groups="Smoke")
+	public void verifyNewUserRegistersAndCheckoutProduct(){
 		
 		//Registering user
 		DataUtils.initUserData();
@@ -27,14 +27,18 @@ public class E2ECheckoutTest extends BaseTest{
 		String actualProductName= addToCartPage. getProductTitle();
 	    Assert.assertEquals(prop.getProperty("expectedProductName"), actualProductName, "Product does not match");
 		
-	    addToCartPage.addProductToCart();
 	    
+	    addToCartPage.addProductToCart();
 		//assert that it is added to cart
 	    String actualText = addToCartPage.getConfirmationMsg();   
         Assert.assertEquals(prop.getProperty("expectedText"), actualText, "Product is not added to cart");
 		
+        
 		//navigate to cart
         addToCartPage.navigateToCart();
+        String actualCartHeading= addToCartPage.cartTitle();
+        Assert.assertEquals(prop.getProperty("expectedCartHeading"), actualCartHeading, "Not navigated to cart");
+        
         
         //check the checkboxes
         checkOutPage.clickCheckBox();
@@ -43,11 +47,14 @@ public class E2ECheckoutTest extends BaseTest{
         
         //move to checkout
         checkOutPage.clickCheckOutBtn();
+        String actualCheckOutHeading= checkOutPage.checkOutTitle();
+        Assert.assertEquals(prop.getProperty("expectedCheckOutHeading"), actualCheckOutHeading, "Not navigated to checkout page");
         
+        //order confirmation
+        checkOutPage.orderConfirmation();
+        String actualOrderPlaced= checkOutPage.orderPlacedMsg();
+        Assert.assertEquals(prop.getProperty("expectedOrderPlaced"), actualOrderPlaced, "Order not placed");
         
-        //billing
-        checkOutPage.selectCountry();
-       
-	}
+	}	
 	
 }

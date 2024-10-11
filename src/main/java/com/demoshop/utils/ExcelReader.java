@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.demoshop.context.Constants;
 
 public class ExcelReader {
-	
+
 
 	public static String getCellValue(int rowNumber, int cellNumber) throws IOException {
 
@@ -23,5 +23,4 @@ public class ExcelReader {
 		return cell.toString();
 
 	}
-	
 }
