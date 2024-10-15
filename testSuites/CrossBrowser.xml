@@ -23,7 +23,7 @@
 	</test>
 
 	<test name="Excel Registeration">
-		<parameter name="browserName" value="Firefox"></parameter>
+		<parameter name="browserName" value="Edge"></parameter>
 		<classes>
 			<class name="com.demoshop.test.ExcelRegisterationTest" />
 
@@ -31,7 +31,7 @@
 	</test>
 
 	<test name="Rg DP2">
-		<parameter name="browserName" value="Firefox"></parameter>
+		<parameter name="browserName" value="Chrome"></parameter>
 		<classes>
 			<class name="com.demoshop.test.RegisterationDP2" />
 		</classes>

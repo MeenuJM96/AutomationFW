@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
+import com.demoshop.context.DriverManager;
 import com.demoshop.pageObjects.AddToCartPage;
 import com.demoshop.pageObjects.CheckOutPage;
 import com.demoshop.pageObjects.LoginPage;
@@ -36,10 +37,11 @@ public class BaseTest {
 	   
 	   System.out.println(browserName);
 		getDriver(browserName);
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		DriverManager.setDriver(driver);
+		DriverManager.getDriver().manage().window().maximize();
+		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		String url=prop.getProperty(prop.getProperty("environment"));
-		driver.get(url);
+		DriverManager.getDriver().get(url);
 		initPages();
 		
 	}
@@ -76,9 +78,10 @@ public class BaseTest {
 	    checkOutPage = new CheckOutPage(driver);
 	}
 	
+
 	@AfterMethod(alwaysRun=true)
 	public void tearDown() {
-		driver.quit();
+		DriverManager.getDriver().quit();
 	}
 
 }

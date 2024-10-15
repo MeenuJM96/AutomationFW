@@ -10,13 +10,12 @@ import com.demoshop.utils.UniqueGenerator;
 
 public class RegisterationTest extends BaseTest {
 
-
 	@Test
 	public void verifyUserIsAbleToRegisterUsingCorrectCredsFromExcel() throws IOException {
 		
 		loginPage.navigateToRegisterationSection();
-		String firstName= ExcelReader.getCellValue(1, 0);
-		String lastName= ExcelReader.getCellValue(1, 1);
+		String firstName= 	ExcelReader.getCellValue(1, 0);
+		String lastName= 	ExcelReader.getCellValue(1, 1);
 		String uniqueEmail =ExcelReader.getCellValue(1, 2)+UniqueGenerator.getCurrentDateTime()+"@gmail.com";
 		String password= ExcelReader.getCellValue(1, 3);
 		registerPage.setUserData(firstName, lastName, uniqueEmail, password);

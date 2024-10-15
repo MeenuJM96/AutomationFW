@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.demoshop.utils.PageActions;
 import com.demoshop.utils.WaitUtils;
 
-public class LoginPage  extends PageActions {
+public class LoginPage extends PageActions {
 
 private WebDriver driver;
 	
@@ -57,6 +57,7 @@ private WebDriver driver;
 	
 	public void navigateToLoginSection() {
 		clickElement(loginHeader);
+		
 	}
 	
 	public void navigateToRegisterationSection() {
